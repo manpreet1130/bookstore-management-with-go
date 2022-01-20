@@ -1,3 +1,5 @@
+// models.go is responsible for managing the data, logic and rules for the application
+
 package models
 
 import (
