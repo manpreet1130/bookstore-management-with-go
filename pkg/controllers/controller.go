@@ -1,3 +1,6 @@
+// controller.go responds to the user input and performs interactions on the data model objects.
+// it receives the input, optionally validates it and then passes the input to the model.
+
 package controllers
 
 import (
@@ -11,6 +14,8 @@ import (
 	"github.com/manpreet1130/bookstore/pkg/utils"
 )
 
+// GetAllBooks takes in an io.Writer and reference to an io.Reader
+// and returns all books present in the database in JSON
 func GetAllBooks(w http.ResponseWriter, r *http.Request) {
 	books := models.GetAllBooks()
 	res, _ := json.Marshal(books)
@@ -19,6 +24,8 @@ func GetAllBooks(w http.ResponseWriter, r *http.Request) {
 	w.Write(res)
 }
 
+// GetBookById retrieves the id from the request and returns the
+// book details for that particular id as response
 func GetBookById(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["bookId"]
@@ -33,6 +40,7 @@ func GetBookById(w http.ResponseWriter, r *http.Request) {
 	w.Write(res)
 }
 
+// DeleteBook deletes book with a given id from the database
 func DeleteBook(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["bookId"]
@@ -47,6 +55,9 @@ func DeleteBook(w http.ResponseWriter, r *http.Request) {
 	w.Write(res)
 }
 
+// UpdateBook gets the book to be updated from the database by
+// referring to its id, performs the updates on the data as required,
+// saves the book back in the database and gives the updated book details as response
 func UpdateBook(w http.ResponseWriter, r *http.Request) {
 	var newBook = &models.Book{}
 	utils.ParseBody(newBook, r)
@@ -78,6 +89,8 @@ func UpdateBook(w http.ResponseWriter, r *http.Request) {
 	w.Write(res)
 }
 
+// CreateBook is used to add a new book into the database and 
+// returns the created book details as response
 func CreateBook(w http.ResponseWriter, r *http.Request) {
 	var book = &models.Book{}
 	utils.ParseBody(book, r)
