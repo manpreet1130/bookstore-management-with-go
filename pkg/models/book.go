@@ -1,4 +1,5 @@
 // models.go is responsible for managing the data, logic and rules for the application
+// and receives all inputs from the controller
 
 package models
 
