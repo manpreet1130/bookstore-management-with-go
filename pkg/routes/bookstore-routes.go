@@ -1,3 +1,5 @@
+// routes.go used to instantiate all the routes required
+
 package routes
 
 import (
@@ -5,7 +7,7 @@ import (
 	"github.com/manpreet1130/bookstore/pkg/controllers"
 )
 
-// CreateRoutes is used to instantiate all the routes needed
+// CreateRoutes takes in a reference to router and creates all the APIs with their corresponding methods
 func CreateRoutes(router *mux.Router) {
 	router.HandleFunc("/book/", controllers.CreateBook).Methods("POST")
 	router.HandleFunc("/book/", controllers.GetAllBooks).Methods("GET")
